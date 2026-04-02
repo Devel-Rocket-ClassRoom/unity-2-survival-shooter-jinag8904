@@ -34,11 +34,16 @@ public class Gun : MonoBehaviour
             {
                 target.OnDamage(damage, hitEnemy.point, hitEnemy.normal);
             }
+
+            else
+            {
+                hitPosition = fireTransform.position + fireTransform.forward * 100;
+            }
         }
 
         else
         {
-            hitPosition = fireTransform.position + fireTransform.forward * 1000;            
+            hitPosition = fireTransform.position + fireTransform.forward * 100;            
         }
 
         gunParticle.Play();

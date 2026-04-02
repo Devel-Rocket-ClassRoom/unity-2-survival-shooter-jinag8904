@@ -70,10 +70,16 @@ public class PlayerMovement : MonoBehaviour
         hitPosition = Vector3.zero;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1000, targetLayer))
+        if (Physics.Raycast(ray, out hit, 100, targetLayer))
         {
             hitPosition = hit.point;
-            transform.LookAt(hitPosition);
         }
+
+        else
+        {
+            hitPosition = transform.position + ray.direction;
+        }
+
+        transform.LookAt(hitPosition);
     }
 }

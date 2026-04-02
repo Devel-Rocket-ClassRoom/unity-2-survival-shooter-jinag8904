@@ -124,6 +124,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (Time.time > lastAttackTime + attackInterval)
         {
             var attackTarget = target.gameObject.GetComponent<IDamageable>();
+
             if (attackTarget != null)
             {
                 attackTarget.OnDamage(AttackPower, new Vector3(0, 0, 0), new Vector3(0, 0, 0));

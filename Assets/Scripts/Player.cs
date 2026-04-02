@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Health -= damage;
         uiManager.SetSlider(Health);
+        uiManager.HitScreenOnOff();
 
         if (Health <= 0 && !isDead)
         {

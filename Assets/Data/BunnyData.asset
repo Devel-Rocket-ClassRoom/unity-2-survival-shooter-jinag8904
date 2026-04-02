@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d71cdbd5810ff7448b4ece16d44321e, type: 3}
   m_Name: BunnyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 75
+  health: 100
   attackPower: 10
   speed: 5
-  addScore: 100
+  addScore: 10
