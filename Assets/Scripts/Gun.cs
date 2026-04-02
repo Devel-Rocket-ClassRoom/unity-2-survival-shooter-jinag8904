@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
 
             if (target != null)
             {
-                target.OnDamage(damage, hit.point, hit.normal);
+                target.OnDamage(damage, hitEnemy.point, hitEnemy.normal);
             }
         }
 

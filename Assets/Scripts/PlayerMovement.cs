@@ -18,35 +18,54 @@ public class PlayerMovement : MonoBehaviour
 
     public Gun gun;
 
+    Player player;
+
+    private float lastShotTime = 0;
+    private float shotInterval = 0.1f;
+
     void Awake()
     {
         playerAnimator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();    
     }
 
     private void Update()
     {
+        if (player.isDead) return;
+
         // 캐릭터 + 카메라 이동
         dir.Set(playerInput.MoveHorizon, 0, playerInput.MoveVert);
         dir.Normalize();
 
         bool hasVerticalInput = playerInput.MoveVert != 0;
         bool hasHorizontalInput = playerInput.MoveHorizon != 0;
-        
-        playerAnimator.SetBool(HashMove, hasHorizontalInput || hasVerticalInput);
-        playerRigidbody.MovePosition(transform.position + dir * moveSpeed * Time.deltaTime);
-        cam.GetComponent<Rigidbody>().MovePosition(cam.transform.position + dir * moveSpeed * Time.deltaTime);
+
+        bool isMoving = hasHorizontalInput || hasVerticalInput;
+
+        if (isMoving)
+        {
+            playerRigidbody.MovePosition(transform.position + dir * moveSpeed * Time.deltaTime);
+        }
+
+        playerAnimator.SetBool(HashMove, isMoving);
+
+        var camTarget = new Vector3(transform.position.x + 0.5f, cam.transform.position.y, transform.position.z - 75);
+        cam.transform.position = Vector3.MoveTowards(cam.transform.position, camTarget, 0.5f);
 
         // 총알 발사
-        if (playerInput.Fire)
+        if (playerInput.Fire && Time.time > lastShotTime + shotInterval)
         {
             gun.Shoot(hit);
+            lastShotTime = Time.time;
         }
     }
 
     private void FixedUpdate()
     {
+        if (player.isDead) return;
+
         // 캐릭터 회전
         hitPosition = Vector3.zero;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
