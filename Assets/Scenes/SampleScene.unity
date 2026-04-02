@@ -490,6 +490,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -2168,8 +2172,9 @@ MonoBehaviour:
   fireTransform: {fileID: 1755653685}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 311
   damage: 25
+  player: {fileID: 1387988538}
 --- !u!1001 &2085911651
 PrefabInstance:
   m_ObjectHideFlags: 0

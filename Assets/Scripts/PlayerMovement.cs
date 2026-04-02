@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         // 총알 발사
         if (playerInput.Fire && Time.time > lastShotTime + shotInterval)
         {
-            gun.Shoot(hit);
+            gun.Shoot();
             lastShotTime = Time.time;
         }
     }

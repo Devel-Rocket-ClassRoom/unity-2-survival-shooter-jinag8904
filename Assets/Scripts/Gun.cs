@@ -14,16 +14,18 @@ public class Gun : MonoBehaviour
 
     private Coroutine coShoot;
 
+    public Player player;
+
     private void Awake()
     {
         bulletLineEffect.positionCount = 2;
         bulletLineEffect.enabled = false;
     }
 
-    public void Shoot(RaycastHit hit)
+    public void Shoot()
     {
-        Vector3 hitPosition = hit.point;
-        Ray ray = new(fireTransform.position, hitPosition);
+        Vector3 hitPosition = new();
+        Ray ray = new(fireTransform.position, player.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hitEnemy, 100, targetLayer))
         {
@@ -34,16 +36,11 @@ public class Gun : MonoBehaviour
             {
                 target.OnDamage(damage, hitEnemy.point, hitEnemy.normal);
             }
-
-            else
-            {
-                hitPosition = fireTransform.position + fireTransform.forward * 100;
-            }
         }
 
         else
         {
-            hitPosition = fireTransform.position + fireTransform.forward * 100;            
+            hitPosition = fireTransform.position + player.transform.forward * 100;
         }
 
         gunParticle.Play();
