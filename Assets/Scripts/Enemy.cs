@@ -67,6 +67,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public int addScore;
 
+    public bool isPaused;
+
     // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
     private void Awake()
@@ -77,14 +79,28 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyCollider = GetComponent<CapsuleCollider>();
 
         CurrentState = State.Move;
-        isDead = false;        
+        isDead = false;
     }
 
     void Update()
     {
+        if (gameManager.isPaused && !isPaused)
+        {
+            OnPause();
+            return;
+        }
+
+        else if (!gameManager.isPaused && isPaused)
+        {
+            OffPause();
+        }
+
+        if (isPaused) return;
+
         switch (_currentState)
         {
             case State.Idle:
+                IdleUpdate();
                 break;
 
             case State.Move:
@@ -100,6 +116,11 @@ public class Enemy : MonoBehaviour, IDamageable
                 else DieUpdate();
                 break;
         }
+    }
+
+    public void IdleUpdate()
+    {
+        return;
     }
 
     public void MoveUpdate()
@@ -166,6 +187,21 @@ public class Enemy : MonoBehaviour, IDamageable
     public void StartSinking()
     {
         Destroy(gameObject, 3);
-        enemyCollider.isTrigger = true;
+    }
+
+    public void OnPause()
+    {
+        isPaused = true;
+        animator.speed = 0;
+        agent.isStopped = true;
+        CurrentState = State.Idle;
+    }
+
+    public void OffPause()
+    {
+        isPaused = false;
+        animator.speed = 1;
+        agent.isStopped = false;
+        CurrentState = State.Move;
     }
 }

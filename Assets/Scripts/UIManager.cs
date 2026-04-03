@@ -9,11 +9,13 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Image hitScreen;
     public GameObject gameOverScreen;
+    public GameObject pausedPanel;
 
     private void Awake()
     {
         hitScreen.enabled = false;
         gameOverScreen.SetActive(false);
+        pausedPanel.SetActive(false);
     }
 
     public void SetSlider(int value)
@@ -41,5 +43,15 @@ public class UIManager : MonoBehaviour
     public void GameOverScreenOn()
     {
         gameOverScreen.SetActive(true);
+    }
+
+    public void PausedPanelOn()
+    {
+        pausedPanel.SetActive(true);
+    }
+
+    public void PausedPanelOff()
+    {
+        pausedPanel.SetActive(false);
     }
 }

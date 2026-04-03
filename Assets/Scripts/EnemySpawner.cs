@@ -17,6 +17,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        if (gameManager.isPaused) return;
+        
         if (Time.time > lastSpawnTime + spawnInterval)
         {
             CreateEnemy();

@@ -8,11 +8,21 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public Player player;
 
+    public bool isPaused = false;
+
     private void Update()
     {
         if (player.isDead)
         {
             StartCoroutine(CoGameOver());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+
+            // 일시정지 UI
+
         }
     }
 
