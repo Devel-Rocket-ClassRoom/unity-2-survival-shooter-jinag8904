@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPaused = !isPaused;
-
-            // 일시정지 UI
-
+            uiManager.PausedPanelOnOff(isPaused);
         }
     }
 

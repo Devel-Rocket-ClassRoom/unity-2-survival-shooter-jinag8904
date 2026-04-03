@@ -45,13 +45,8 @@ public class UIManager : MonoBehaviour
         gameOverScreen.SetActive(true);
     }
 
-    public void PausedPanelOn()
+    public void PausedPanelOnOff(bool active)
     {
-        pausedPanel.SetActive(true);
-    }
-
-    public void PausedPanelOff()
-    {
-        pausedPanel.SetActive(false);
+        pausedPanel.SetActive(active);
     }
 }
